@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tayb | Cybersecurity Engineer</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Arial Black", Arial, sans-serif;
+            background:
+                    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+                    url("https://images.unsplash.com/photo-1510511459019-5dda7724fd87");
+            background-size: 110% 110%;
+            background-position: center;
+            animation: backgroundMove 25s ease-in-out infinite;
+            color: #ffffff;
+        }
+
+        @keyframes backgroundMove {
+            0% { background-position: center; }
+            50% { background-position: center top; }
+            100% { background-position: center; }
+        }
+
+        /* Animations */
+        @keyframes fadeOutZoom {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.8); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-out { animation: fadeOutZoom 0.8s ease forwards; }
+        .fade-in { animation: fadeInUp 1s ease forwards; }
+
+        /* Heart animation */
+        @keyframes pulseHeart {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.4); }
+            100% { transform: scale(1); }
+        }
+
+        /* Welcome Screen */
+        #welcomeScreen {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .welcome-box {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(12px);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            width: 330px;
+        }
+
+        .welcome-box input {
+            width: 90%;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .welcome-box button {
+            margin-top: 20px;
+            padding: 10px 30px;
+            border-radius: 25px;
+            border: none;
+            background: #006b97;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #errorMsg {
+            margin-top: 15px;
+            color: #ff4d4d;
+            font-size: 18px;
+            display: none;
+        }
+
+        /* Lover Screen */
+        #loverScreen {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, #300018, #000);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+            animation: fadeInUp 1s ease;
+        }
+
+        #loverText {
+            font-size: 64px;
+            color: #ff4d6d;
+        }
+
+        #loverHeart {
+            font-size: 140px;
+            animation: pulseHeart 1s infinite;
+        }
+
+        /* Main Site */
+        #mainSite {
+            display: none;
+            min-height: 100vh;
+            text-align: center;
+            padding: 40px;
+            background: rgba(0,0,0,0.35);
+            border-radius: 20px;
+        }
+
+        h1 { font-size: 42px; }
+        h2 { color: #c8adad; font-weight: normal; }
+        h3 { color: #e6dede; font-weight: normal; }
+
+        p {
+            max-width: 700px;
+            margin: 20px auto;
+            font-size: 18px;
+        }
+
+        .buttons a {
+            text-decoration: none;
+            color: white;
+            background: #006b97;
+            padding: 12px 25px;
+            margin: 10px;
+            border-radius: 25px;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Welcome -->
+<div id="welcomeScreen">
+    <div class="welcome-box">
+        <h2>Welcome 👋</h2>
+        <p>Please enter your name</p>
+        <input type="text" id="guestName" placeholder="Your name">
+        <br>
+        <button onclick="enterSite()">Enter Website</button>
+        <div id="errorMsg">مرفوض</div>
+    </div>
+</div>
+
+<!-- Lover Full Screen -->
+<div id="loverScreen">
+    <div id="loverText">my lover</div>
+    <div id="loverHeart">❤️</div>
+</div>
+
+<!-- Main Site -->
+<div id="mainSite">
+    <h1 id="welcomeTitle"></h1>
+    <h2>Cybersecurity Engineering Student</h2>
+    <h3>Tayb developed this website</h3>
+
+    <p>
+        Hello, I'm Tayb. I am an Iraqi cybersecurity engineering student,
+        currently in my second year at Al-Ma'moon University College (MU).
+        I am passionate about cybersecurity, technology, and protecting people
+        from digital threats.
+    </p>
+    <p>
+        My goal is to help people understand cybersecurity,
+        stay safe online, and build a more secure digital future.
+    </p>
+
+    <div class="buttons">
+        <a href="https://www.instagram.com/nottaybb" target="_blank">Instagram</a>
+        <a href="https://www.tiktok.com/@arttayb" target="_blank">TikTok</a>
+    </div>
+
+    <footer>
+        © 2025 Tayb | Cybersecurity Engineer
+    </footer>
+</div>
+
+<script>
+    function enterSite() {
+        const name = document.getElementById("guestName").value.trim().toLowerCase();
+        const errorMsg = document.getElementById("errorMsg");
+
+        const allowed = ["tayb", "mina", "25", "abdullah", "ahmed"];
+
+        errorMsg.style.display = "none";
+
+        if (!allowed.includes(name)) {
+            errorMsg.style.display = "block";
+            return;
+        }
+
+        document.getElementById("welcomeScreen").style.display = "none";
+
+        if (name === "mina" || name === "25") {
+            document.getElementById("loverScreen").style.display = "flex";
+
+            setTimeout(() => {
+                document.getElementById("loverScreen").classList.add("fade-out");
+
+                setTimeout(() => {
+                    document.getElementById("loverScreen").style.display = "none";
+                    showMain(name);
+                }, 800);
+
+            }, 2500);
+        } else {
+            showMain(name);
+        }
+    }
+
+    function showMain(name) {
+        const main = document.getElementById("mainSite");
+        main.style.display = "block";
+        main.classList.add("fade-in");
+
+        const displayName =
+            name === "25" ? "25" : name.charAt(0).toUpperCase() + name.slice(1);
+
+        document.getElementById("welcomeTitle").innerText =
+            "Welcome, " + displayName + " 👋";
+    }
+</script>
+
+</body>
+</html>
