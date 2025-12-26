@@ -5,51 +5,33 @@
     <title>Tayb | Cybersecurity Engineer</title>
 
     <style>
+        /* ===== GLOBAL ===== */
         body {
             margin: 0;
             font-family: "Arial Black", Arial, sans-serif;
             background:
                     linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
                     url("https://images.unsplash.com/photo-1510511459019-5dda7724fd87");
-            background-size: 110% 110%;
+            background-size: 100% 100%;
             background-position: center;
             animation: backgroundMove 25s ease-in-out infinite;
             color: #ffffff;
         }
 
-        /* Background animation */
         @keyframes backgroundMove {
             0% { background-position: center; }
             50% { background-position: center top; }
             100% { background-position: center; }
         }
 
-        /* Transitions */
-        @keyframes fadeOutZoom {
-            from { opacity: 1; transform: scale(1); }
-            to { opacity: 0; transform: scale(0.8); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-out { animation: fadeOutZoom 0.8s ease forwards; }
-        .fade-in  { animation: fadeInUp 1s ease forwards; }
-
-        /* Heart animation */
-        @keyframes pulseHeart {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.4); }
-            100% { transform: scale(1); }
-        }
-
-        /* Welcome screen */
+        /* ===== WELCOME SCREEN ===== */
         #welcomeScreen {
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
+
         .welcome-box {
             background: rgba(0,0,0,0.6);
             backdrop-filter: blur(12px);
@@ -58,6 +40,7 @@
             text-align: center;
             width: 330px;
         }
+
         .welcome-box input {
             width: 90%;
             padding: 10px;
@@ -65,8 +48,8 @@
             border: none;
             margin-top: 15px;
             text-align: center;
-            font-size: 16px;
         }
+
         .welcome-box button {
             margin-top: 20px;
             padding: 10px 30px;
@@ -74,17 +57,16 @@
             border: none;
             background: #006b97;
             color: white;
-            font-size: 16px;
             cursor: pointer;
         }
+
         #errorMsg {
             margin-top: 15px;
             color: #ff4d4d;
-            font-size: 18px;
             display: none;
         }
 
-        /* Full screen message */
+        /* ===== OVERLAY ===== */
         #fullScreen {
             position: fixed;
             inset: 0;
@@ -94,42 +76,132 @@
             align-items: center;
             flex-direction: column;
             z-index: 9999;
-            animation: fadeInUp 1s ease;
         }
+
         #fullText {
             font-size: 56px;
             color: #ff4d6d;
-            text-align: center;
         }
+
         #fullHeart {
             font-size: 140px;
-            margin-top: 10px;
             animation: pulseHeart 1s infinite;
             display: none;
         }
 
-        /* Main site */
+        @keyframes pulseHeart {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.4); }
+            100% { transform: scale(1); }
+        }
+
+        /* ===== MESSAGE SCREEN ===== */
+        #messageScreen {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 9998;
+            overflow-y: auto;
+        }
+
+        #messageContent {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 30px;
+            background: rgba(0,0,0,0.6);
+            border-radius: 20px;
+            white-space: pre-line;
+            line-height: 1.9;
+            font-size: 18px;
+            color: #ffdede;
+            text-align: center;
+        }
+
+        #continueBtn {
+            margin-top: 30px;
+            padding: 12px 35px;
+            border-radius: 25px;
+            border: none;
+            background: #ff4d6d;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* ================================================= */
+        /* =============== MAIN SITE STYLING ================ */
+        /* ================================================= */
+
         #mainSite {
             display: none;
             min-height: 100vh;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 40px;
-            background: rgba(0,0,0,0.35);
-            border-radius: 20px;
         }
-        h1 { font-size: 42px; }
-        h2 { color: #c8adad; font-weight: normal; }
-        h3 { color: #e6dede; font-weight: normal; }
-        p { max-width: 700px; margin: 20px auto; font-size: 18px; }
+
+        .main-card {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(0,0,0,0.65);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 55px 45px;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(0,0,0,0.85);
+        }
+
+        .main-card h1 {
+            font-size: 46px;
+            margin-bottom: 12px;
+        }
+
+        .main-card h2 {
+            font-size: 22px;
+            color: #c8adad;
+            margin-bottom: 6px;
+        }
+
+        .main-card h3 {
+            font-size: 16px;
+            color: #bfa7a7;
+            margin-bottom: 35px;
+        }
+
+        .main-card p {
+            font-size: 18px;
+            line-height: 1.85;
+            margin-bottom: 24px;
+            color: #f0eaea;
+        }
+
+        /* Buttons */
         .buttons a {
-            text-decoration: none;
+            display: inline-block;
+            min-width: 150px;
+            margin: 12px;
+            padding: 14px 30px;
+            font-size: 17px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #0072ff, #00c6ff);
             color: white;
-            background: #006b97;
-            padding: 12px 25px;
-            margin: 10px;
-            border-radius: 25px;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        footer { margin-top: 40px; font-size: 14px; }
+
+        .buttons a:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,198,255,0.5);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #d8bcbc;
+        }
     </style>
 </head>
 
@@ -139,112 +211,136 @@
 <div id="welcomeScreen">
     <div class="welcome-box">
         <h2>Welcome 👋</h2>
-        <p>Please enter your name</p>
-        <input type="text" id="guestName" placeholder="Your name">
+        <input id="guestName" placeholder="Your name">
         <br>
         <button onclick="enterSite()">Enter Website</button>
         <div id="errorMsg">مرفوض</div>
     </div>
 </div>
 
-<!-- Full Screen Message -->
+<!-- Lover / Lilly -->
 <div id="fullScreen">
     <div id="fullText"></div>
     <div id="fullHeart">❤️</div>
 </div>
 
-<!-- Main Site -->
-<div id="mainSite">
-    <h1 id="welcomeTitle"></h1>
-    <h2>Cybersecurity Engineering Student</h2>
-    <h3>Tayb developed this website</h3>
+<!-- Message -->
+<div id="messageScreen">
+    <div id="messageContent">
+        <img src="https://url-shortener.me/5CRB" style="max-width:100%;border-radius:15px;margin-bottom:20px;">
 
-    <p>
-        Hello, I'm Tayb. I am an Iraqi cybersecurity engineering student,
-        currently in my second year at Al-Ma'moon University College (MU).
-        I am passionate about cybersecurity, technology, and protecting people
-        from digital threats.
-    </p>
+        كل عام وانتي بالف خير
+        يارب متشوفين غير العافيه بحياتج وتطلعين المعدل الي يفرحج ويفرح اهلج
+        وعقبال مية سنة
+        انتبهي لنفسج ولكل خطوة تخطيها
 
-    <p>
-        My goal is to help people understand cybersecurity,
-        stay safe online, and build a more secure digital future.
-    </p>
+        احبج مينا وماظن فديوم راح ينتهي حبي الج
 
-    <div class="buttons">
-        <a href="https://www.instagram.com/nottaybb" target="_blank">Instagram</a>
-        <a href="https://www.tiktok.com/@arttayb" target="_blank">TikTok</a>
+        اتمنى والله من كل كلبي تلكين الشخص الي يناسبج انتي
+        والي يفرحج والي راح تحبيه من صدك
+
+        خلي بالج من صديقاتج
+        ماغير حالنا غيرهن
+
+        اتمنالج حياة سعيدة
+
+        ماعرف شنو احجي الباقي
+        عندي مشاعر سلبيه تجاهج بسببج
+
+        استودعتج الله من كل شر ومكروه
+
+        12/25
+        12:25 AM
+
+        <button id="continueBtn" onclick="continueToMain()">Continue</button>
     </div>
-    <footer>
-        © 2025 Tayb | Cybersecurity Engineer
-    </footer>
+</div>
 
+<!-- MAIN SITE (نفس النص، فقط ترتيب شكلي) -->
+<div id="mainSite">
+    <div class="main-card">
 
+        <h1 id="welcomeTitle"></h1>
+        <h2>Cybersecurity Engineering Student</h2>
+        <h3>Tayb developed this website</h3>
+
+        <p>
+            Hello, I'm Tayb. I am an Iraqi cybersecurity engineering student,
+            currently in my second year at Al-Ma'moon University College (MU).
+            I am passionate about cybersecurity, technology, and protecting people
+            from digital threats.
+        </p>
+
+        <p>
+            My goal is to help people understand cybersecurity,
+            stay safe online, and build a more secure digital future.
+        </p>
+
+        <div class="buttons">
+            <a href="https://www.instagram.com/nottaybb" target="_blank">Instagram</a>
+            <a href="https://www.tiktok.com/@arttayb" target="_blank">TikTok</a>
+        </div>
+
+        <footer>
+            © 2025 Tayb | Cybersecurity Engineer
+        </footer>
+
+    </div>
 </div>
 
 <script>
-    function enterSite() {
-        const name = document.getElementById("guestName").value.trim().toLowerCase();
-        const errorMsg = document.getElementById("errorMsg");
+    let currentUser = "";
 
-        const allowed = ["tayb", "mina", "25", "abdullah", "ahmed"];
+    function enterSite() {
+        const name = guestName.value.trim().toLowerCase();
         errorMsg.style.display = "none";
 
+        const allowed = ["tayb","mina","25","ahmed","abdullah"];
         if (!allowed.includes(name)) {
             errorMsg.style.display = "block";
             return;
         }
 
-        document.getElementById("welcomeScreen").style.display = "none";
+        currentUser = name;
+        welcomeScreen.style.display = "none";
 
-        const full = document.getElementById("fullScreen");
-        const text = document.getElementById("fullText");
-        const heart = document.getElementById("fullHeart");
-
-        // mina & 25 → my lover + heart
         if (name === "mina" || name === "25") {
-            text.innerText = "my lover";
-            heart.style.display = "block";
-            showOverlayThenEnter(name);
-            return;
-        }
-
-        // ahmed & abdullah → my fucking lilly (no heart)
-        if (name === "ahmed" || name === "abdullah") {
-            text.innerText = "my fucking lilly";
-            heart.style.display = "none";
-            showOverlayThenEnter(name);
-            return;
-        }
-
-        // default
-        showMain(name);
-
-        function showOverlayThenEnter(username) {
-            full.style.display = "flex";
-            setTimeout(() => {
-                full.classList.add("fade-out");
-                setTimeout(() => {
-                    full.style.display = "none";
-                    full.classList.remove("fade-out");
-                    showMain(username);
-                }, 800);
-            }, 2500);
+            showOverlay("my lover", true);
+        } else if (name === "ahmed" || name === "abdullah") {
+            showOverlay("my fucking lilly", false);
+        } else {
+            showMain(name);
         }
     }
 
+    function showOverlay(text, heart) {
+        fullText.innerText = text;
+        fullHeart.style.display = heart ? "block" : "none";
+        fullScreen.style.display = "flex";
+
+        setTimeout(() => {
+            fullScreen.style.display = "none";
+
+            if (heart) {
+                messageScreen.style.display = "block";
+            } else {
+                showMain(currentUser);
+            }
+        }, 2500);
+    }
+
+    function continueToMain() {
+        messageScreen.style.display = "none";
+        showMain(currentUser);
+    }
+
     function showMain(name) {
-        const main = document.getElementById("mainSite");
-        main.style.display = "block";
-        main.classList.add("fade-in");
-
-        const displayName =
-            name === "25" ? "25" : name.charAt(0).toUpperCase() + name.slice(1);
-
-        document.getElementById("welcomeTitle").innerText =
-            "Welcome, " + displayName + " 👋";
+        mainSite.style.display = "block";
+        welcomeTitle.innerText =
+            "Welcome, " + (name === "25" ? "25" : name.charAt(0).toUpperCase() + name.slice(1));
     }
 </script>
 
 </body>
 </html>
+
