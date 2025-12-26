@@ -17,13 +17,14 @@
             color: #ffffff;
         }
 
+        /* Background animation */
         @keyframes backgroundMove {
             0% { background-position: center; }
             50% { background-position: center top; }
             100% { background-position: center; }
         }
 
-        /* Animations */
+        /* Transitions */
         @keyframes fadeOutZoom {
             from { opacity: 1; transform: scale(1); }
             to { opacity: 0; transform: scale(0.8); }
@@ -33,7 +34,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .fade-out { animation: fadeOutZoom 0.8s ease forwards; }
-        .fade-in { animation: fadeInUp 1s ease forwards; }
+        .fade-in  { animation: fadeInUp 1s ease forwards; }
 
         /* Heart animation */
         @keyframes pulseHeart {
@@ -42,14 +43,13 @@
             100% { transform: scale(1); }
         }
 
-        /* Welcome Screen */
+        /* Welcome screen */
         #welcomeScreen {
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
         .welcome-box {
             background: rgba(0,0,0,0.6);
             backdrop-filter: blur(12px);
@@ -58,7 +58,6 @@
             text-align: center;
             width: 330px;
         }
-
         .welcome-box input {
             width: 90%;
             padding: 10px;
@@ -68,7 +67,6 @@
             text-align: center;
             font-size: 16px;
         }
-
         .welcome-box button {
             margin-top: 20px;
             padding: 10px 30px;
@@ -79,7 +77,6 @@
             font-size: 16px;
             cursor: pointer;
         }
-
         #errorMsg {
             margin-top: 15px;
             color: #ff4d4d;
@@ -87,11 +84,11 @@
             display: none;
         }
 
-        /* Lover Screen */
-        #loverScreen {
+        /* Full screen message */
+        #fullScreen {
             position: fixed;
             inset: 0;
-            background: radial-gradient(circle, #300018, #000);
+            background: radial-gradient(circle, #1a0008, #000);
             display: none;
             justify-content: center;
             align-items: center;
@@ -99,18 +96,19 @@
             z-index: 9999;
             animation: fadeInUp 1s ease;
         }
-
-        #loverText {
-            font-size: 64px;
+        #fullText {
+            font-size: 56px;
             color: #ff4d6d;
+            text-align: center;
         }
-
-        #loverHeart {
+        #fullHeart {
             font-size: 140px;
+            margin-top: 10px;
             animation: pulseHeart 1s infinite;
+            display: none;
         }
 
-        /* Main Site */
+        /* Main site */
         #mainSite {
             display: none;
             min-height: 100vh;
@@ -119,17 +117,10 @@
             background: rgba(0,0,0,0.35);
             border-radius: 20px;
         }
-
         h1 { font-size: 42px; }
         h2 { color: #c8adad; font-weight: normal; }
         h3 { color: #e6dede; font-weight: normal; }
-
-        p {
-            max-width: 700px;
-            margin: 20px auto;
-            font-size: 18px;
-        }
-
+        p { max-width: 700px; margin: 20px auto; font-size: 18px; }
         .buttons a {
             text-decoration: none;
             color: white;
@@ -138,11 +129,7 @@
             margin: 10px;
             border-radius: 25px;
         }
-
-        footer {
-            margin-top: 40px;
-            font-size: 14px;
-        }
+        footer { margin-top: 40px; font-size: 14px; }
     </style>
 </head>
 
@@ -160,10 +147,10 @@
     </div>
 </div>
 
-<!-- Lover Full Screen -->
-<div id="loverScreen">
-    <div id="loverText">my lover</div>
-    <div id="loverHeart">❤️</div>
+<!-- Full Screen Message -->
+<div id="fullScreen">
+    <div id="fullText"></div>
+    <div id="fullHeart">❤️</div>
 </div>
 
 <!-- Main Site -->
@@ -178,6 +165,7 @@
         I am passionate about cybersecurity, technology, and protecting people
         from digital threats.
     </p>
+
     <p>
         My goal is to help people understand cybersecurity,
         stay safe online, and build a more secure digital future.
@@ -187,10 +175,11 @@
         <a href="https://www.instagram.com/nottaybb" target="_blank">Instagram</a>
         <a href="https://www.tiktok.com/@arttayb" target="_blank">TikTok</a>
     </div>
-
     <footer>
         © 2025 Tayb | Cybersecurity Engineer
     </footer>
+
+
 </div>
 
 <script>
@@ -199,7 +188,6 @@
         const errorMsg = document.getElementById("errorMsg");
 
         const allowed = ["tayb", "mina", "25", "abdullah", "ahmed"];
-
         errorMsg.style.display = "none";
 
         if (!allowed.includes(name)) {
@@ -209,20 +197,39 @@
 
         document.getElementById("welcomeScreen").style.display = "none";
 
+        const full = document.getElementById("fullScreen");
+        const text = document.getElementById("fullText");
+        const heart = document.getElementById("fullHeart");
+
+        // mina & 25 → my lover + heart
         if (name === "mina" || name === "25") {
-            document.getElementById("loverScreen").style.display = "flex";
+            text.innerText = "my lover";
+            heart.style.display = "block";
+            showOverlayThenEnter(name);
+            return;
+        }
 
+        // ahmed & abdullah → my fucking lilly (no heart)
+        if (name === "ahmed" || name === "abdullah") {
+            text.innerText = "my fucking lilly";
+            heart.style.display = "none";
+            showOverlayThenEnter(name);
+            return;
+        }
+
+        // default
+        showMain(name);
+
+        function showOverlayThenEnter(username) {
+            full.style.display = "flex";
             setTimeout(() => {
-                document.getElementById("loverScreen").classList.add("fade-out");
-
+                full.classList.add("fade-out");
                 setTimeout(() => {
-                    document.getElementById("loverScreen").style.display = "none";
-                    showMain(name);
+                    full.style.display = "none";
+                    full.classList.remove("fade-out");
+                    showMain(username);
                 }, 800);
-
             }, 2500);
-        } else {
-            showMain(name);
         }
     }
 
